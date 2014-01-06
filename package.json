@@ -1,6 +1,6 @@
 {
   "name": "scroll",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A function that animates an element’s scrollTop value.",
   "main": "index.js",
   "dependencies": {
