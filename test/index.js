@@ -19,7 +19,7 @@ box.style.cssText = [
 
 var n = 50
 while (--n) {
-  container.appendChild(box.cloneNode())
+  container.appendChild(box.cloneNode(true))
 }
 
 document.body.appendChild(container)
