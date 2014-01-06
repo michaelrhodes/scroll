@@ -1,8 +1,6 @@
 # scroll
 A function that animates an element’s scrollTop value.
 
-[![Build status](https://travis-ci.org/michaelrhodes/scroll.png?branch=master)](https://travis-ci.org/michaelrhodes/scroll)
-
 [![Browser support](https://ci.testling.com/michaelrhodes/scroll.png)](https://ci.testling.com/michaelrhodes/scroll)
 
 ## Install
