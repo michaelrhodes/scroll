@@ -10,7 +10,7 @@ npm install scroll
 
 ### API
 ```
-  scroll(
+  scroll.top || scroll.left (
     element (element),
     target (number): the desired scrollTop position,
     options (object): { duration, ease },
