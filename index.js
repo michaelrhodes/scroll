@@ -11,6 +11,7 @@ var scroll = function(direction, element, target, options, callback) {
   }
 
   else {
+    options = options || {}
     type = options.ease || type
     duration = options.duration || duration
   }
