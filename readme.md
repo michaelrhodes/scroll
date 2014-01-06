@@ -1,5 +1,5 @@
 # scroll
-A function that animates an element’s scrollTop value.
+A function that animates an element’s scrollTop/scrollLeft values.
 
 [![Browser support](https://ci.testling.com/michaelrhodes/scroll.png)](https://ci.testling.com/michaelrhodes/scroll)
 

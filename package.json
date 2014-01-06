@@ -1,7 +1,7 @@
 {
   "name": "scroll",
-  "version": "0.0.2",
-  "description": "A function that animates an element’s scrollTop value.",
+  "version": "0.0.3",
+  "description": "A function that animates an element’s scrollTop/scrollLeft values.",
   "main": "index.js",
   "dependencies": {
     "ease-component": "~1.0.0",
