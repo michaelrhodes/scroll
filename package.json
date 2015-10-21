@@ -1,12 +1,11 @@
 {
   "name": "scroll",
-  "version": "0.0.3",
-  "description": "A function that animates an element’s scrollTop/scrollLeft values.",
+  "version": "1.0.0",
+  "description": "A function that animates an element’s scrollTop or scrollLeft position.",
   "main": "index.js",
   "dependencies": {
     "ease-component": "~1.0.0",
-    "raf-component": "~1.1.2",
-    "eventlistener": "0.0.1"
+    "raf-component": "~1.1.2"
   },
   "devDependencies": {
     "tape": "~2.3.2"

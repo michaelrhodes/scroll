@@ -1,73 +1,65 @@
 var raf = require('raf-component')
 var ease = require('ease-component')
-var listener = require('eventlistener')
 
-var scroll = function(direction, element, target, options, callback) {
+function scroll (prop, element, to, options, callback) {
+  var start = +new Date
+  var from = element[prop]
+  var cancelled = false
   var type = 'inOutSine'
   var duration = 350
 
   if (typeof options === 'function') {
     callback = options
   }
-
   else {
     options = options || {}
     type = options.ease || type
     duration = options.duration || duration
+    callback = callback || function () {}
   }
-  
-  callback = callback || function() {} 
 
-  var start = +new Date
-  var from = element['scroll' + direction]
-  var to = (target == null ?
-    element['scroll' + (direction === 'Top' ? 'Height' : 'Width')] :
-    target
-  )
+  var easing = ease[type]
 
-  var cancelled = false
-  var cancel = function() {
-    cancelled = true
-    listener.remove(element, 'mousewheel', cancel)
-  }
-  
   if (from === to) {
-    return callback(new Error(
-      'Element already at target position.'
-    ))
+    return callback(
+      new Error('Element already at target scroll position'),
+      element[prop]
+    )
   }
-  
-  listener.add(element, 'mousewheel', cancel)
 
-  var scroll = function(timestamp) {
+  function cancel () {
+    cancelled = true
+  }
+
+  function animate (timestamp) {
     if (cancelled) {
-      return callback(new Error(
-        'Scroll cancelled by the user.'
-      ))
+      return callback(
+        new Error('Scroll cancelled'),
+        element[prop]
+      )
     }
 
     var now = +new Date
     var time = Math.min(1, ((now - start) / duration))
-    var eased = ease[type](time)
+    var eased = easing(time)
 
-    element['scroll' + direction] = (eased * (to - from)) + from
+    element[prop] = (eased * (to - from)) + from
 
-    if (time < 1) {
-      return raf(scroll)
-    }
-    
-    cancel()  
-    callback(null, element['scroll' + direction])
+    time < 1 ?
+      raf(animate) :
+      callback(null, element[prop])
   }
 
-  raf(scroll)
+  raf(animate)
+
+  return cancel
 }
 
 module.exports = {
-  top: function(element, target, options, callback) {
-    scroll('Top', element, target, options, callback)
+  top: function (element, to, options, callback) {
+    return scroll('scrollTop', element, to, options, callback)
   },
-  left: function(element, target, options, callback) {
-    scroll('Left', element, target, options, callback)
+  left: function (element, to, options, callback) {
+    return scroll('scrollLeft', element, to, options, callback)
   }
 }

@@ -24,25 +24,38 @@ while (--n) {
 
 document.body.appendChild(container)
 
-run('it works', function(test) {
+run('it scrolls', function (test) {
+  container.scrollTop = 0
+  container.scrollLeft = 200 
+
+  test.plan(3)
+
+  scroll.top(container, 200, function (error, position) {
+    test.ok(position === 200, 'it scrolled down 200 pixels')
+
+    scroll.top(container, 200, function (error, position) {
+      test.equal(error.message, 'Element already at target scroll position')
+    })
+  })
+
+  var leftOptions = { duration: 1000, ease: 'inBounce' }
+  scroll.left(container, -200, leftOptions, function (error, position) {
+    test.ok(position === 0, 'it scrolled across 200 pixels')
+  })
+})
+
+run('it can be cancelled', function (test) {
   container.scrollTop = 0
   container.scrollLeft = 200 
 
   test.plan(2)
 
-  scroll.top(container, 200, function(error, position) {
-    clearTimeout(timeout)
-    test.ok(position === 200, 'it scrolled down 200 pixels')
-  })
+  var options = { duration: 1000, ease: 'inBounce' }
+  var cancel = scroll.left(container, -200, options,
+    function (error, position) {
+      test.ok(error, 'it produced an error')
+      test.equal(error.message, 'Scroll cancelled', 'it cancelled the animation')
+    })
 
-  var leftOptions = { duration: 1000, ease: 'inBounce' }
-  scroll.left(container, -200, leftOptions, function(error, position) {
-    clearTimeout(timeout)
-    test.ok(position === 0, 'it scrolled across 200 pixels')
-  })
-
-  var timeout = setTimeout(function() {
-    test.fail('it never called back :\'(')
-    test.end() 
-  }, 1100)
+  setTimeout(cancel, 500)
 })
