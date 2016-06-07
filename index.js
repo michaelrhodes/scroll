@@ -1,11 +1,11 @@
 var raf = require('rafl')
-var ease = require('ease-component')
 
 function scroll (prop, element, to, options, callback) {
   var start = +new Date
   var from = element[prop]
   var cancelled = false
-  var type = 'inOutSine'
+
+  var ease = inOutSine
   var duration = 350
 
   if (typeof options === 'function') {
@@ -13,12 +13,10 @@ function scroll (prop, element, to, options, callback) {
   }
   else {
     options = options || {}
-    type = options.ease || type
+    ease = options.ease || ease
     duration = options.duration || duration
     callback = callback || function () {}
   }
-
-  var easing = ease[type]
 
   if (from === to) {
     return callback(
@@ -41,7 +39,7 @@ function scroll (prop, element, to, options, callback) {
 
     var now = +new Date
     var time = Math.min(1, ((now - start) / duration))
-    var eased = easing(time)
+    var eased = ease(time)
 
     element[prop] = (eased * (to - from)) + from
 
@@ -53,6 +51,10 @@ function scroll (prop, element, to, options, callback) {
   raf(animate)
 
   return cancel
+}
+
+function inOutSine (n) {
+  return .5 * (1 - Math.cos(Math.PI * n));
 }
 
 module.exports = {

@@ -1,4 +1,5 @@
 var run = require('tape')
+var ease = require('ease-component')
 var scroll = require('../')
 
 var container = document.createElement('div')
@@ -38,7 +39,7 @@ run('it scrolls', function (test) {
     })
   })
 
-  var leftOptions = { duration: 1000, ease: 'inBounce' }
+  var leftOptions = { duration: 1000, ease: ease.inBounce }
   scroll.left(container, -200, leftOptions, function (error, position) {
     test.ok(position === 0, 'it scrolled across 200 pixels')
   })
@@ -50,7 +51,7 @@ run('it can be cancelled', function (test) {
 
   test.plan(2)
 
-  var options = { duration: 1000, ease: 'inBounce' }
+  var options = { duration: 1000, ease: ease.inBounce }
   var cancel = scroll.left(container, -200, options,
     function (error, position) {
       test.ok(error, 'it produced an error')

@@ -6,20 +6,23 @@ A function that animates an element’s scrollTop or scrollLeft position.
 
 | compression      |    size |
 | :--------------- | ------: |
-| scroll.js        | 6.68 kB |
-| scroll.min.js    | 3.93 kB |
-| scroll.min.js.gz | 1.34 kB |
+| scroll.js        |  2.6 kB |
+| scroll.min.js    | 1.47 kB |
+| scroll.min.js.gz |   700 B |
 
 
 ## Install
 
-    npm install scroll
+```sh
+$ npm install scroll
+```
 
 ### Usage
 
 ```js
 var scroll = require('scroll')
 var page = require('scroll-doc')()
+var ease = require('ease-component')
 
 // Basic usage
 scroll.left(page, 200)
@@ -36,15 +39,15 @@ scroll.top(page, 200, function (error, scrollTop) {
   // This is always returned, even when there’s an `error`.
 })
 
-// Specify an easing function (default: 'inOutSine')
-scroll.left(page, 200, { ease: 'inBounce' })
+// Specify a custom easing function
+scroll.left(page, 200, { ease: ease.inBounce })
 
 // Specify a duration in milliseconds (default: 350) and register a callback.
 scroll.left(page, 200, { duration: 1000 }, function (error, scrollLeft) {
 })
 
 // Cancel a scroll animation 
-var options = { ease: 'inBounce', duration: 1000 }
+var options = { duration: 1000 }
 var cancel = scroll.top(page, 200, options, function (error, scrollTop) {
   console.log(error.message)
   // => Scroll cancelled
@@ -55,7 +58,7 @@ var cancel = scroll.top(page, 200, options, function (error, scrollTop) {
 page.addEventListener('wheel', cancel)
 ```
 
-Note: The easing functions are those specified in [component/ease](https://github.com/component/ease).
+Note: The default easing is `inOutSine` from [component/ease](https://github.com/component/ease).
 
 ### License
 

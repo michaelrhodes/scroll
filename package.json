@@ -4,10 +4,10 @@
   "description": "A function that animates an element’s scrollTop or scrollLeft position.",
   "main": "index.js",
   "dependencies": {
-    "ease-component": "~1.0.0",
     "rafl": "~1.2.1"
   },
   "devDependencies": {
+    "ease-component": "~1.0.0",
     "tape": "~2.3.2"
   },
   "scripts": {
