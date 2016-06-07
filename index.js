@@ -1,4 +1,4 @@
-var raf = require('raf-component')
+var raf = require('rafl')
 var ease = require('ease-component')
 
 function scroll (prop, element, to, options, callback) {
