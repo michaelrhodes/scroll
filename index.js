@@ -54,7 +54,7 @@ function scroll (prop, element, to, options, callback) {
 }
 
 function inOutSine (n) {
-  return .5 * (1 - Math.cos(Math.PI * n));
+  return .5 * (1 - Math.cos(Math.PI * n))
 }
 
 module.exports = {
