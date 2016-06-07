@@ -11,10 +11,7 @@ npm install scroll
 ### Usage
 ``` js
 var scroll = require('scroll')
-
-var page = /Firefox/.test(navigator.userAgent) ?
-  document.documentElement :
-  document.body
+var page = require('scroll-doc')()
 
 // Basic usage
 scroll.left(page, 200)
