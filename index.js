@@ -1,5 +1,6 @@
 var raf = require('rafl')
 var ease = require('ease-component')
+raf.bind(window)
 
 function scroll (prop, element, to, options, callback) {
   var start = +new Date
