@@ -27,7 +27,7 @@ document.body.appendChild(container)
 
 run('it scrolls', function (test) {
   container.scrollTop = 0
-  container.scrollLeft = 200 
+  container.scrollLeft = 200
 
   test.plan(3)
 
@@ -47,7 +47,7 @@ run('it scrolls', function (test) {
 
 run('it can be cancelled', function (test) {
   container.scrollTop = 0
-  container.scrollLeft = 200 
+  container.scrollLeft = 200
 
   test.plan(2)
 
@@ -59,4 +59,23 @@ run('it can be cancelled', function (test) {
     })
 
   setTimeout(cancel, 500)
+})
+
+run('callback fires after scroll events', function (test) {
+  container.scrollTop = 0
+  test.plan(1)
+
+  var okay = true
+  var done = false
+
+  container.addEventListener('scroll', function () {
+    if (done) okay = false
+  }, false)
+
+  scroll.top(container, 200, function () {
+    done = true
+    setTimeout(function () {
+      test.ok(okay, 'callback fired after scroll events')
+    }, 100)
+  })
 })

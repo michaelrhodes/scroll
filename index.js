@@ -43,9 +43,9 @@ function scroll (prop, element, to, options, callback) {
 
     element[prop] = (eased * (to - from)) + from
 
-    time < 1 ?
-      raf(animate) :
+    time < 1 ? raf(animate) : raf(function () {
       callback(null, element[prop])
+    })
   }
 
   raf(animate)
