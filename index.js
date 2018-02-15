@@ -14,7 +14,7 @@ function scroll (prop, element, to, options, callback) {
   else {
     options = options || {}
     ease = options.ease || ease
-    duration = options.duration || duration
+    duration = typeof options.duration === 'undefined' ? duration : options.duration
     callback = callback || function () {}
   }
 
