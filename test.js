@@ -1,6 +1,6 @@
 var run = require('tape')
 var ease = require('ease-component')
-var scroll = require('../')
+var scroll = require('./')
 
 var container = document.createElement('div')
 var box = document.createElement('div')

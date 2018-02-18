@@ -1,67 +1,50 @@
 var raf = require('rafl')
+var E_NOSCROLL = new Error('Element already at target scroll position')
+var E_CANCELLED = new Error('Scroll cancelled')
+var min = Math.min
 
-function scroll (prop, element, to, options, callback) {
-  var start = +new Date
-  var from = element[prop]
-  var cancelled = false
+module.exports = {
+  left: make('scrollLeft'),
+  top: make('scrollTop')
+}
 
-  var ease = inOutSine
-  var duration = 350
+function make (prop) {
+  return function scroll (el, to, opts, cb) {
+    if (typeof opts == 'function') cb = opts, opts = {}
+    if (typeof cb != 'function') cb = noop
 
-  if (typeof options === 'function') {
-    callback = options
-  }
-  else {
-    options = options || {}
-    ease = options.ease || ease
-    duration = options.duration || duration
-    callback = callback || function () {}
-  }
+    var start = +new Date
+    var from = el[prop]
+    var ease = opts.ease || inOutSine
+    var duration = !isNaN(opts.duration) ? +opts.duration : 350
+    var cancelled = false
 
-  if (from === to) {
-    return callback(
-      new Error('Element already at target scroll position'),
-      element[prop]
-    )
-  }
+    return from === to ?
+      cb(E_NOSCROLL, el[prop]) :
+      raf(animate), cancel
 
-  function cancel () {
-    cancelled = true
-  }
-
-  function animate (timestamp) {
-    if (cancelled) {
-      return callback(
-        new Error('Scroll cancelled'),
-        element[prop]
-      )
+    function cancel () {
+      cancelled = true
     }
 
-    var now = +new Date
-    var time = Math.min(1, ((now - start) / duration))
-    var eased = ease(time)
+    function animate (timestamp) {
+      if (cancelled) return cb(E_CANCELLED, el[prop])
 
-    element[prop] = (eased * (to - from)) + from
+      var now = +new Date
+      var time = min(1, ((now - start) / duration))
+      var eased = ease(time)
 
-    time < 1 ? raf(animate) : raf(function () {
-      callback(null, element[prop])
-    })
+      el[prop] = (eased * (to - from)) + from
+
+      time < 1 ? raf(animate) : raf(function () {
+        cb(null, el[prop])
+      })
+    }
   }
-
-  raf(animate)
-
-  return cancel
 }
 
 function inOutSine (n) {
-  return .5 * (1 - Math.cos(Math.PI * n))
+  return 0.5 * (1 - Math.cos(Math.PI * n))
 }
 
-module.exports = {
-  top: function (element, to, options, callback) {
-    return scroll('scrollTop', element, to, options, callback)
-  },
-  left: function (element, to, options, callback) {
-    return scroll('scrollLeft', element, to, options, callback)
-  }
-}
+function noop () {}

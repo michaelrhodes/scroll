@@ -1,43 +1,20 @@
 {
   "name": "scroll",
+  "author": "Michael Rhodes",
   "version": "2.0.1",
-  "description": "A function that animates an element’s scrollTop or scrollLeft position.",
   "main": "index.js",
+  "repository": "git@github.com:michaelrhodes/scroll",
+  "description": "A function that animates an element’s scrollTop or scrollLeft position.",
+  "keyword": ["scrollTop", "scrollTo", "animate"],
+  "license": "MIT",
+  "scripts": {
+    "test": "tape test.js"
+  },
   "dependencies": {
     "rafl": "~1.2.1"
   },
   "devDependencies": {
     "ease-component": "~1.0.0",
     "tape": "~2.3.2"
-  },
-  "scripts": {
-    "test": "tape test/*.js"
-  },
-  "testling": {
-    "files": "test/*.js",
-    "browsers": {
-      "ie": [6, 7, 8, 9, 10],
-      "chrome": [20, 25, 29],
-      "firefox": [3, 4, 7, 19, 24],
-      "safari": [5.1, 6],
-      "opera": [10, 12, 15],
-      "iphone": [6],
-      "android": [4.2]
-    }  
-  },
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:michaelrhodes/scroll.git"
-  },
-  "keywords": [
-    "scrollTop",
-    "scrollTo",
-    "animate"
-  ],
-  "author": "Michael Rhodes",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/michaelrhodes/scroll/issues"
-  },
-  "homepage": "https://github.com/michaelrhodes/scroll" 
+  }
 }
