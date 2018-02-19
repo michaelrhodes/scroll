@@ -10,6 +10,8 @@ module.exports = {
 
 function make (prop) {
   return function scroll (el, to, opts, cb) {
+    opts = opts || {}
+
     if (typeof opts == 'function') cb = opts, opts = {}
     if (typeof cb != 'function') cb = noop
 
