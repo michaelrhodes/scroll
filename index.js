@@ -1,4 +1,3 @@
-var raf = require('rafl')
 var E_NOSCROLL = new Error('Element already at target scroll position')
 var E_CANCELLED = new Error('Scroll cancelled')
 var min = Math.min
@@ -23,7 +22,7 @@ function make (prop) {
 
     return from === to ?
       cb(E_NOSCROLL, el[prop]) :
-      raf(animate), cancel
+      requestAnimationFrame(animate), cancel
 
     function cancel () {
       cancelled = true
@@ -38,9 +37,11 @@ function make (prop) {
 
       el[prop] = (eased * (to - from)) + from
 
-      time < 1 ? raf(animate) : raf(function () {
-        cb(null, el[prop])
-      })
+      time < 1 ?
+        requestAnimationFrame(animate) :
+        requestAnimationFrame(function () {
+          cb(null, el[prop])
+        })
     }
   }
 }
