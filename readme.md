@@ -1,17 +1,16 @@
 # scroll
+animates the scroll top/left position of an element (in 340 bytes)
 
-A function that animates an element’s scrollTop or scrollLeft position.
+[![browser support](https://ci.testling.com/michaelrhodes/scroll.png)](https://ci.testling.com/michaelrhodes/scroll)
 
-[![Browser support](https://ci.testling.com/michaelrhodes/scroll.png)](https://ci.testling.com/michaelrhodes/scroll)
+note: you may need to polyfill [`requestAnimationFrame`](https://caniuse.com/#feat=requestanimationframe) in older browsers
 
 ## install
-
 ```sh
-$ npm install scroll
+npm install scroll
 ```
 
 ## use
-
 ```js
 var scroll = require('scroll')
 var page = require('scroll-doc')()
@@ -51,15 +50,7 @@ var cancel = scroll.top(page, 200, options, function (err, scrollTop) {
 page.addEventListener('wheel', cancel)
 ```
 
-Note: The default easing is `inOutSine` from [component/ease](https://github.com/component/ease).
-
-| compression      |    size |
-| :--------------- | ------: |
-| scroll.js        | 2.86 kB |
-| scroll.min.js    | 1.71 kB |
-| scroll.min.js.gz |   764 B |
-
+note: the default easing is `inOutSine` from [component/ease](https://github.com/component/ease).
 
 ## obey
-
-[MIT](http://opensource.org/licenses/MIT)
+[MIT](https://github.com/michaelrhodes/scroll/blob/master/LICENSE)

@@ -4,8 +4,8 @@
   "version": "2.0.3",
   "main": "index.js",
   "repository": "git@github.com:michaelrhodes/scroll",
-  "description": "A function that animates an element’s scrollTop or scrollLeft position.",
-  "keyword": ["scrollTop", "scrollTo", "animate"],
+  "description": "animates the scroll top/left position of an element",
+  "keyword": ["scrollTop", "scrollLeft", "scrollTo", "animate"],
   "license": "MIT",
   "scripts": {
     "test": "tape test.js"
