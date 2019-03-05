@@ -1,6 +1,7 @@
 var E_NOSCROLL = new Error('Element already at target scroll position')
 var E_CANCELLED = new Error('Scroll cancelled')
 var min = Math.min
+var ms = Date.now
 
 module.exports = {
   left: make('scrollLeft'),
@@ -14,7 +15,7 @@ function make (prop) {
     if (typeof opts == 'function') cb = opts, opts = {}
     if (typeof cb != 'function') cb = noop
 
-    var start = +new Date
+    var start = ms()
     var from = el[prop]
     var ease = opts.ease || inOutSine
     var duration = !isNaN(opts.duration) ? +opts.duration : 350
@@ -31,7 +32,7 @@ function make (prop) {
     function animate (timestamp) {
       if (cancelled) return cb(E_CANCELLED, el[prop])
 
-      var now = +new Date
+      var now = ms()
       var time = min(1, ((now - start) / duration))
       var eased = ease(time)
 
