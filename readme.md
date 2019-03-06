@@ -1,5 +1,5 @@
 # scroll
-animates the scroll top/left position of an element (in 340 bytes)
+animates the scroll top/left position of an element
 
 [![browser support](https://ci.testling.com/michaelrhodes/scroll.png)](https://ci.testling.com/michaelrhodes/scroll)
 
