@@ -1,7 +1,7 @@
 {
   "name": "scroll",
   "author": "Michael Rhodes",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "main": "index.js",
   "repository": "git@github.com:michaelrhodes/scroll",
   "description": "animates the scroll top/left position of an element",
